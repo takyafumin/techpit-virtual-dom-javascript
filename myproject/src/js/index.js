@@ -1,5 +1,5 @@
 import h from './vdom/createElement';
-import { render } from './vdom/render';
+import { app } from './vdom/app';
 
 const INITIAL_STATE = {
     accounts: [
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
             name: "リオネル・メッシ",
             team: "FCバルセロナ",
             description:
-            "アルゼンチンサンタフェ州ロサリオ出身のイタリア系アルゼンチン人サッカー選手。リーガ・エスパニョーラ・FCバルセロナ所属。アルゼンチン代表。ポジションはフォワード (wikipedia)",
+                "アルゼンチンサンタフェ州ロサリオ出身のイタリア系アルゼンチン人サッカー選手。リーガ・エスパニョーラ・FCバルセロナ所属。アルゼンチン代表。ポジションはフォワード (wikipedia)",
             isFollow: false,
         },
         {
@@ -16,7 +16,7 @@ const INITIAL_STATE = {
             name: "クリスティアーノ・ロナウド",
             team: "Juventus",
             description:
-            "ポルトガル・フンシャル出身のサッカー選手。セリエA・ユヴェントスFC所属。ポルトガル代表。ポジションはフォワード (wikipedia)",
+                "ポルトガル・フンシャル出身のサッカー選手。セリエA・ユヴェントスFC所属。ポルトガル代表。ポジションはフォワード (wikipedia)",
             isFollow: true,
         },
         {
@@ -24,7 +24,7 @@ const INITIAL_STATE = {
             name: "ネイマール",
             team: "パリサンジェルマン",
             description:
-            "ブラジル・サンパウロ州モジ・ダス・クルーゼス出身のサッカー選手。ブラジル代表。リーグ・アン・パリ・サンジェルマンFC所属。ポジションはフォワード (wikipedia)",
+                "ブラジル・サンパウロ州モジ・ダス・クルーゼス出身のサッカー選手。ブラジル代表。リーグ・アン・パリ・サンジェルマンFC所属。ポジションはフォワード (wikipedia)",
             isFollow: false,
         },
     ]
@@ -63,6 +63,7 @@ const accountItem = (account) => {
                                 attrs: {
                                     type: "button",
                                     class: `followBtn ${account.isFollow ? "isFollow" : ""}`,
+                                    onclick: () => alert(account.name),
                                 },
                                 children: [account.isFollow ? "フォロー中" : "フォローする"],
                             }),
@@ -95,7 +96,9 @@ const view = (props) =>
         }),
     });
 
-const $app = render(view(INITIAL_STATE));
-const el = document.getElementById('app');
-el.appendChild($app);
+app({
+    root: "#app",
+    initialState: INITIAL_STATE,
+    view,
+});
 
