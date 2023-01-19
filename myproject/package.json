@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel src/index.html --open",
+    "build": "parcel src/index.html -d public",
     "format": "prettier --check ./src",
     "format:fix": "prettier --write ./src"
   },
